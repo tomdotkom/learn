@@ -1,0 +1,149 @@
+<style type="text/css">
+<!--
+h1 {
+	height: 50px;
+	width: 500px;
+	padding-top: 20px;
+	padding-left: 30px;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	border-bottom-color: #0FF;
+	margin-top: 0px;
+	padding-bottom: 10px;
+}
+span {
+	font-size: 16px;
+}
+#devtim {
+	width: 200px;
+	float: none;
+	margin-top: -50px;
+	margin-left: 400px;
+	padding-bottom: 10px;
+}
+#memo {
+	height: 200px;
+	width: 550px;
+	border-top-width: 2px;
+	border-right-width: 3px;
+	border-bottom-width: 3px;
+	border-left-width: 2px;
+	border-top-style: solid;
+	border-right-style: double;
+	border-bottom-style: double;
+	border-left-style: solid;
+	border-top-color: #0CF;
+	border-right-color: #30C;
+	border-bottom-color: #30C;
+	border-left-color: #0CF;
+	margin-top: 20px;
+}
+#container #src {
+	float: right;
+	padding-right: 100px;
+}
+#container #image {
+	margin-top: 30px;
+}
+#container {
+	background-color: #FC6;
+	width: 600px;
+	padding-left: 20px;
+}
+#container #devenv {
+	width: 500px;
+	margin-top: 80px;
+	padding-top: 20px;
+	border-top-width: 3px;
+	border-top-style: double;
+	border-top-color: #0F9;
+	padding-left: 0px;
+}
+#container #devcontainer {
+	width: 600px;
+	margin-top: 0px;
+	padding-top: 10px;
+	border-top-style: none;
+	border-top-color: #0F9;
+	padding-left: 20px;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+-->
+</style>
+<div id="container">
+  <h1><span>タイトル:</span><%= @medevlp.title %></h1>
+  
+  <div id="devtim">
+    
+    【開発時期】<%= @medevlp.devtim %>
+    
+  </div>
+  
+  <div id="memo">内容:</br>
+    <%= @medevlp.memo %>
+  </div>
+  <div id="image">
+    <% @medevlp.files.each do |file| %>
+    <%= image_tag "/action/#{@medevlp.directory}/#{file}", :width=>'250', :height=>'250' %>
+    <% end %>
+  </div>
+  <div id="src">ソースファイル:
+    <% @medevlp.sources.each do |file| %>
+    <%= link_to image_tag( "download.jpg", :width=>'50', :height=>'50' ), "/action/#{@medevlp.directory}/#{file}" %>
+    <% end %>
+  </div>
+  
+  <div id="devenv">《開発環境》</div>
+  <div id="devcontainer" >
+    <% if @medevlp.devdetails.any? %>
+	<table border="1">
+	<tr><th></th><th>使用言語</th><th>開発ツール</th><th></th></tr>
+    <% @medevlp.devdetails.each do |devdetail| %>
+  <tr>
+    <td><%= devdetail.devenvt %></td><td><%= devdetail.devlang %></td><td><%= devdetail.devtool %></td>
+  <% if member_signed_in? %>
+  <td>
+  <%= link_to 'Edit', url_for([devdetail.medevlp, devdetail])+'/edit' %>
+  <%= link_to 'Delete' , [devdetail.medevlp, devdetail], :confirm=>'Sure?',
+							:method=> :delete,
+							:remote=>true %>
+  </td>
+  <% end %>
+  </tr>
+  <% end %>
+  </table>
+  <% else %>
+  <li> no message </li>
+  <% end %>
+  </div>
+  <p>
+  <% if member_signed_in? %>
+  <%= form_for([@medevlp, @devdetail]) do |f| %>
+  
+  <div class = "field">
+    <%= f.label :devenvt %>
+    <%= f.text_field :devenvt %>
+  </div>
+  <div class = "field">
+    <%= f.label :devlang %>
+    <%= f.text_area :devlang,
+			:rows=>5 %>
+  </div>
+  <div class = "field">
+    <%= f.label :devtool %>
+    <%= f.text_area :devtool,
+			:rows=>5 %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  
+  <% end %>
+  <% end %>
+  </br>
+  </p>
+  <%= link_to 'Home', medevlps_path %>
+</div>

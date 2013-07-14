@@ -1,0 +1,27 @@
+<h1>Detail Edit</h1>
+
+<%= @medevlp.title %>
+<%= form_for(@medevlp) do |f| %>
+<%= fields_for(@devdetail) do |fs| %>
+<div class = "field">
+	<%= fs.label :devenvt %>
+	<%= fs.text_field :devenvt %>
+</div>
+<div class = "field">
+	<%= fs.label :devlang %>
+	<%= fs.text_area :devlang,
+			:rows=>5 %>
+</div>
+<div class = "field">
+	<%= fs.label :devtool %>
+	<%= fs.text_area :devtool,
+			:rows=>5 %>
+</div>
+
+<div class="actions">
+	<%= fs.submit %>
+</div>
+
+<% end %>
+<% end %>
+

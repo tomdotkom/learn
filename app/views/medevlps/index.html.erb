@@ -1,0 +1,91 @@
+<style type="text/css">
+<!--
+table {
+	border: 1px solid #306;
+	background-color: #9FC;
+	width: 400px;
+}
+#sign_in {
+	float: right;
+	width: 100px;
+	margin-top: -50px;
+}
+#container table tr th {
+	color: #60F;
+	border: 2px solid #30F;
+}
+td {
+	border: 1px solid #30C;
+}
+h1 {
+	height: 50px;
+	width: 400px;
+	padding-top: 10px;
+	padding-left: 50px;
+	border-bottom-width: 1px;
+	border-bottom-style: double;
+	border-bottom-color: #FFF;
+	margin-bottom: 20px;
+	padding-bottom: 10px;
+}
+#copyright {
+	font-size: 12px;
+	text-align: center;
+	width: 600px;
+}
+#container {
+	border: 2px solid #0FF;
+	color: #00F;
+	background-color: #FCC;
+	padding-left: 20px;
+	width: 600px;
+}
+-->
+</style>
+<div id="container">
+  <h1>開発実績</h1>
+  <div id="sign_in">
+    <% if member_signed_in? %>
+    <%= link_to 'Logout', destroy_member_session_path %>
+    <% else %>
+    <%= link_to 'Login', new_member_session_path %>
+    <%= link_to 'UserNew', new_member_registration_path %>
+    <% end %>
+  </div>
+  <p>
+  <table>
+    <tr>
+      <th>タイトル</th><th>時期</th><th>内容</th>
+      <% if member_signed_in? %>
+      <td></td>
+      <% end %>
+    </tr>
+    <% @medevlps.each do |medevlp| %>
+    <tr><td>
+      <%= link_to medevlp.title, medevlp_path(medevlp) %>
+      </td>
+      <td>
+        <%= medevlp.devtim %>
+      </td>
+      <td>
+        <%= medevlp.content %>
+      </td>
+      <% if member_signed_in? %>
+      <td>
+        <%= link_to 'Edit', edit_medevlp_path(medevlp) %>
+        <%= link_to 'Delete', medevlp, :confirm=>'Sure?',
+				:method=>:delete %>
+      </td>
+      <% end %>
+    </tr>
+    <% end %>
+    
+  </table>
+  
+  </p>
+  <%= link_to 'Home', medevlps_path %> 
+  <% if member_signed_in? %>
+  | <%= link_to 'New', new_medevlp_path %>
+  <% end %>
+</div>
+<p id="copyright">Copyright &copy Office-COACH, All Right Reserved.</p>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  dev-env: MyString
+  dev-lang: MyText
+  dev-tool: MyText
+  directory: MyString
+  medevlp: 
+
+two:
+  dev-env: MyString
+  dev-lang: MyText
+  dev-tool: MyText
+  directory: MyString
+  medevlp: 

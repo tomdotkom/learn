@@ -1,0 +1,35 @@
+<%= form_for(@medevlp) do |f| %>
+
+<div class = "field">
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+</div>
+<div class = "field">
+	<%= f.label :devtim %>
+	<%= f.text_field :devtim %>
+</div>
+<div class = "field">
+	<%= f.label :content %>
+	<%= f.text_area :content,
+			:rows=>2 %>
+</div>
+<div class = "field">
+	<%= f.label :memo %>
+	<%= f.text_area :memo,
+			:rows=>5 %>
+</div>
+<div><label for="page_file">Image File</label><br/>
+<%= f.file_field :file %><br/>
+<%= f.file_field :file1 %>
+</div>
+<div><label for="page_file">Source File</label><br/>
+<%= f.file_field :file2 %><br/>
+</div>
+
+<div class="actions">
+	<%= f.submit %>
+</div>
+
+<% end %>
+
+<%= link_to 'home', medevlps_path %>
