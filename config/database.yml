@@ -21,7 +21,8 @@ test:
 production:
   adapter: mysql2
   encoding: utf8
-  username: sqale_2a17c335a6
-  password: 62c81f4db0a539bd196a9e863c3809845c138155df5292c5
-  database: sqale_2a17c335a6
-  host: mysql001.sqale.jp
+  username: tk
+  password: kkht2012
+  database: medevlp_production
+  pool: 5
+  socket: /var/lib/mysql/mysql.sock
